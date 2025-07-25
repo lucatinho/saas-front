@@ -1,59 +1,29 @@
-import Swal from 'sweetalert2';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 export class ToastUtils {
-  static readonly toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 2000,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-  });
+  private static toast: HotToastService;
 
-  static success(title: string) {
-    ToastUtils.toast.fire({ icon: 'success', title: title });
+  static init(toast: HotToastService) {
+    ToastUtils.toast = toast;
+    ToastUtils.toast.defaultConfig = {
+      ...ToastUtils.toast.defaultConfig,
+      position: 'top-right',
+    };
   }
 
-  static error(title?: string) {
-    if (!title) {
-      title = 'Ocorreu um erro inesperado';
-    }
-    ToastUtils.toast.fire({ icon: 'error', title: title });
+  static info(message: string) {
+    ToastUtils.toast.info(message);
   }
 
-  static warning(title: string) {
-    ToastUtils.toast.fire({ icon: 'warning', title: title });
+  static success(message: string) {
+    ToastUtils.toast.success(message);
   }
 
-  static question(title: string) {
-    ToastUtils.toast.fire({ icon: 'question', title: title });
+  static warning(message: string) {
+    ToastUtils.toast.warning(message);
   }
 
-  static info(title: string) {
-    ToastUtils.toast.fire({ icon: 'info', title: title });
-  }
-
-  static custom(
-    title: string,
-    icon: 'warning' | 'error' | 'success' | 'question' | 'info',
-    timer = 2000,
-  ) {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: timer,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-      },
-    });
-
-    Toast.fire({
-      icon: icon,
-      title: title,
-    });
+  static error(message: string) {
+    ToastUtils.toast.error(message);
   }
 }

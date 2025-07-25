@@ -1,5 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+import { HotToastService } from '@ngxpert/hot-toast';
+import { ToastUtils } from './shared/utils/toast.utils';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +11,8 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  protected readonly title = signal('saas-front');
-
-  constructor() {
-    console.log('test');
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(toast: HotToastService) {
+    ToastUtils.init(toast);
   }
 }
