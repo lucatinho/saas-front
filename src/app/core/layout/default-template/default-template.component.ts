@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
@@ -17,7 +17,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   templateUrl: './default-template.component.html',
   styleUrl: './default-template.component.scss',
 })
-export class DefaultTemplateComponent {
+export class DefaultTemplateComponent implements AfterViewInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   isMobile = false;
   menuStyle: MatDrawerMode = 'over';
@@ -26,20 +26,23 @@ export class DefaultTemplateComponent {
 
   private breakpointObserver = inject(BreakpointObserver);
 
-  constructor() {
-    this.breakpointObserver
-      .observe([Breakpoints.Handset])
-      .subscribe((result) => {
-        this.isMobile = result.matches;
-        if (result.matches) {
-          this.menuStyle = 'over';
-        } else {
-          this.menuStyle = 'side';
-          this.sideNavMenuOpen = true;
-          this.drawer.open().then();
-        }
-        console.log(this.isMobile);
-      });
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.breakpointObserver
+        .observe([Breakpoints.Handset])
+        .subscribe((result) => {
+          this.isMobile = result.matches;
+          this.sideNavMenuOpen = !result.matches;
+          if (result.matches) {
+            this.menuStyle = 'over';
+            this.drawer.close().then();
+          } else {
+            this.menuStyle = 'side';
+            this.drawer.open().then();
+          }
+          console.log(this.isMobile);
+        });
+    });
   }
 
   sideNavMenuController(): void {
