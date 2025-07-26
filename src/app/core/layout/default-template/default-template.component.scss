@@ -1,3 +1,7 @@
 .sidenavBar {
   height: calc(100dvh - var(--header-bar-size));
+
+  .limit-size {
+    max-width: 75%;
+  }
 }

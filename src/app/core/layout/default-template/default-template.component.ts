@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-ordem-servico-template',
@@ -13,6 +14,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     MatDrawerContainer,
     MatDrawer,
     MatSidenavModule,
+    MenuComponent,
   ],
   templateUrl: './default-template.component.html',
   styleUrl: './default-template.component.scss',
@@ -35,19 +37,22 @@ export class DefaultTemplateComponent implements AfterViewInit {
           this.sideNavMenuOpen = !result.matches;
           if (result.matches) {
             this.menuStyle = 'over';
-            this.drawer.close().then();
+            this.sideNavMenuController(false);
           } else {
             this.menuStyle = 'side';
-            this.drawer.open().then();
+            this.sideNavMenuController(true);
           }
-          console.log(this.isMobile);
         });
     });
   }
 
-  sideNavMenuController(): void {
-    this.sideNavMenuOpen = !this.sideNavMenuOpen;
-    if (this.sideNavMenuOpen) {
+  buttonHeaderMenu(): void {
+    this.sideNavMenuController(!this.sideNavMenuOpen);
+  }
+
+  private sideNavMenuController(status: boolean): void {
+    this.sideNavMenuOpen = status;
+    if (status) {
       this.drawer.open().then();
     } else {
       this.drawer.close().then();
