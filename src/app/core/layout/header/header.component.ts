@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 
@@ -9,7 +9,9 @@ import { MatIconButton } from '@angular/material/button';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  sideNavMenuOpen = output();
+
   menuButton(): void {
-    console.log('click');
+    this.sideNavMenuOpen.emit();
   }
 }
