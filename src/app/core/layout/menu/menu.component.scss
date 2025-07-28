@@ -1,0 +1,38 @@
+::ng-deep .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  align-items: center;
+}
+
+.active-menu-item {
+  .icons-item, .desc-title {
+    color: var(--primary-color);
+  }
+}
+
+.icons-item, .desc-title {
+  color: #3f3f3f;
+}
+
+.desc-title {
+  margin-left: 8px;
+}
+
+.mat-expansion-panel {
+  box-shadow: none !important;
+
+  .mat-expansion-panel-header {
+    padding: 0 16px;
+
+    &.mat-expanded {
+      height: 48px;
+    }
+  }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 24px;
+  }
+
+  .child-list {
+    padding: 0;
+  }
+}

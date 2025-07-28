@@ -1,7 +1,7 @@
 <app-header (sideNavMenuOpen)="buttonHeaderMenu()"></app-header>
 <mat-drawer-container class="sidenavBar" [hasBackdrop]="menuStyle === 'over'">
   <mat-drawer class="limit-size" #drawer [mode]="menuStyle">
-    <app-menu></app-menu>
+    <app-menu (selectedItem)="selectedItemMenu()"></app-menu>
   </mat-drawer>
   <mat-drawer-content>
     teste

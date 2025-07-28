@@ -1,1 +1,28 @@
-<p>menu works!</p>
+<mat-nav-list>
+  @for (item of items; track item.title) {
+    @if (!item.children) {
+      <a mat-list-item [routerLink]="item.route" [ngClass]="{ 'active-menu-item': item.active }">
+        <mat-icon [fontSet]="item.active ? 'material-icons' : 'material-icons-outlined'"
+                  class="icons-item">{{ item.icon }}
+        </mat-icon>
+        <span class="desc-title">{{ item.title }}</span> </a>
+    } @else {
+      <mat-expansion-panel [expanded]="item.open">
+        <mat-expansion-panel-header [ngClass]="{ 'active-menu-item': item.open }">
+          <mat-icon [fontSet]="item.open ? 'material-icons' : 'material-icons-outlined'"
+                    class="icons-item">{{ item.icon }}
+          </mat-icon>
+          <span class="desc-title">{{ item.title }}</span></mat-expansion-panel-header>
+        <mat-nav-list class="child-list">
+          @for (child of item.children; track child.title) {
+            <a mat-list-item [routerLink]="child.route" [ngClass]="{ 'active-menu-item': child.active }">
+              <mat-icon [fontSet]="child.active ? 'material-icons' : 'material-icons-outlined'"
+                        class="icons-item">{{ child.icon }}
+              </mat-icon>
+              <span class="desc-title">{{ child.title }}</span> </a>
+          }
+        </mat-nav-list>
+      </mat-expansion-panel>
+    }
+  }
+</mat-nav-list>

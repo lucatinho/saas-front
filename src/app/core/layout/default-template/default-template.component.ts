@@ -50,6 +50,10 @@ export class DefaultTemplateComponent implements AfterViewInit {
     this.sideNavMenuController(!this.sideNavMenuOpen);
   }
 
+  selectedItemMenu(): void {
+    if (this.menuStyle === 'over') this.sideNavMenuController(false);
+  }
+
   private sideNavMenuController(status: boolean): void {
     this.sideNavMenuOpen = status;
     if (status) {
