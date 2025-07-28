@@ -36,7 +36,11 @@ export class MenuComponent {
       });
   }
 
-  updateActiveItems(currentUrl: string) {
+  itemClicked(): void {
+    this.selectedItem.emit();
+  }
+
+  private updateActiveItems(currentUrl: string): void {
     this.items.forEach((item) => {
       if (item.children) {
         item.open = item.children.some((child) =>
@@ -49,6 +53,5 @@ export class MenuComponent {
         item.active = currentUrl.includes(item.route!);
       }
     });
-    this.selectedItem.emit();
   }
 }

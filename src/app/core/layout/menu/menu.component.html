@@ -1,7 +1,8 @@
 <mat-nav-list>
   @for (item of items; track item.title) {
     @if (!item.children) {
-      <a mat-list-item [routerLink]="item.route" [ngClass]="{ 'active-menu-item': item.active }">
+      <a mat-list-item [routerLink]="item.route" [ngClass]="{ 'active-menu-item': item.active }"
+         (click)="itemClicked()">
         <mat-icon [fontSet]="item.active ? 'material-icons' : 'material-icons-outlined'"
                   class="icons-item">{{ item.icon }}
         </mat-icon>
@@ -15,7 +16,8 @@
           <span class="desc-title">{{ item.title }}</span></mat-expansion-panel-header>
         <mat-nav-list class="child-list">
           @for (child of item.children; track child.title) {
-            <a mat-list-item [routerLink]="child.route" [ngClass]="{ 'active-menu-item': child.active }">
+            <a mat-list-item [routerLink]="child.route" [ngClass]="{ 'active-menu-item': child.active }"
+               (click)="itemClicked()">
               <mat-icon [fontSet]="child.active ? 'material-icons' : 'material-icons-outlined'"
                         class="icons-item">{{ child.icon }}
               </mat-icon>
