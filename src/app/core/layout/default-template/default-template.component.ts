@@ -21,29 +21,24 @@ import { MenuComponent } from '../menu/menu.component';
 })
 export class DefaultTemplateComponent implements AfterViewInit {
   @ViewChild('drawer') drawer!: MatDrawer;
-  isMobile = false;
-  menuStyle: MatDrawerMode = 'over';
 
-  sideNavMenuOpen = false;
+  menuStyle: MatDrawerMode = 'side';
+  sideNavMenuOpen = true;
 
   private breakpointObserver = inject(BreakpointObserver);
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.breakpointObserver
-        .observe([Breakpoints.Handset])
-        .subscribe((result) => {
-          this.isMobile = result.matches;
-          this.sideNavMenuOpen = !result.matches;
-          if (result.matches) {
-            this.menuStyle = 'over';
-            this.sideNavMenuController(false);
-          } else {
-            this.menuStyle = 'side';
-            this.sideNavMenuController(true);
-          }
-        });
-    });
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        if (result.matches) {
+          this.menuStyle = 'over';
+          this.sideNavMenuController(false);
+        } else {
+          this.menuStyle = 'side';
+          this.sideNavMenuController(true);
+        }
+      });
   }
 
   buttonHeaderMenu(): void {
@@ -57,9 +52,9 @@ export class DefaultTemplateComponent implements AfterViewInit {
   private sideNavMenuController(status: boolean): void {
     this.sideNavMenuOpen = status;
     if (status) {
-      this.drawer.open().then();
+      this.drawer.open();
     } else {
-      this.drawer.close().then();
+      this.drawer.close();
     }
   }
 }

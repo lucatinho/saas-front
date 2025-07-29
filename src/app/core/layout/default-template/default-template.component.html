@@ -1,11 +1,12 @@
 <app-header (sideNavMenuOpen)="buttonHeaderMenu()"></app-header>
-<mat-drawer-container class="sidenavBar" [hasBackdrop]="menuStyle === 'over'">
-  <mat-drawer class="limit-size" #drawer [mode]="menuStyle">
+<mat-drawer-container class="sidenavBarPage" [hasBackdrop]="menuStyle === 'over'">
+  <mat-drawer class="sidenavBar" #drawer [mode]="menuStyle">
     <app-menu (selectedItem)="selectedItemMenu()"></app-menu>
   </mat-drawer>
-  <mat-drawer-content>
-    teste
-    <router-outlet></router-outlet>
+  <mat-drawer-content class="drawer-contenet">
+    <div [class.content-template]="menuStyle === 'side'">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
 

@@ -1,7 +1,20 @@
-.sidenavBar {
+.sidenavBarPage {
   height: calc(100dvh - var(--header-bar-size));
 
-  .limit-size {
+  .sidenavBar {
     max-width: 75%;
+    background-color: white;
+  }
+
+  .drawer-contenet {
+    background-color: #F3F4F6;
+    display: flex;
+  }
+
+  .content-template {
+    flex-grow: 1;
+    margin: 20px;
+    border-radius: 5px;
+    background-color: white;
   }
 }
