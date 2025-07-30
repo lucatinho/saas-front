@@ -2,19 +2,18 @@
   height: calc(100dvh - var(--header-bar-size));
 
   .sidenavBar {
+    width: 359px;
     max-width: 75%;
     background-color: white;
   }
 
-  .drawer-contenet {
-    background-color: #F3F4F6;
-    display: flex;
-  }
-
   .content-template {
-    flex-grow: 1;
-    margin: 20px;
-    border-radius: 5px;
+    padding: 20px;
     background-color: white;
+
+    &.side {
+      margin: 20px;
+      border-radius: 8px;
+    }
   }
 }

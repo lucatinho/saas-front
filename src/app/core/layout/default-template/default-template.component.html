@@ -3,8 +3,8 @@
   <mat-drawer class="sidenavBar" #drawer [mode]="menuStyle">
     <app-menu (selectedItem)="selectedItemMenu()"></app-menu>
   </mat-drawer>
-  <mat-drawer-content class="drawer-contenet">
-    <div [class.content-template]="menuStyle === 'side'">
+  <mat-drawer-content>
+    <div [class.side]="menuStyle === 'side'" class="mat-elevation-z7 content-template">
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>

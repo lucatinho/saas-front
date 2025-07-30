@@ -7,9 +7,12 @@
   padding: 0 5px;
 }
 
-.btn {
-  width: 48px;
-  height: 48px;
+.btn:focus {
+  box-shadow: none;
+}
+
+.btn ::ng-deep .mat-ripple-element {
+  background-color: rgba(196, 196, 196, 0.3);
 }
 
 .icon {

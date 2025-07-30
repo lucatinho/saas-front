@@ -1,12 +1,39 @@
 import { IMenuItem } from '../interfaces/IMenuItems.interface';
+import { RouteUtils } from './route.utils';
 
 export class MenuItems {
+  static readonly usuariosTec: IMenuItem[] = [
+    {
+      icon: 'group',
+      title: 'Clientes',
+      route: RouteUtils.PAGES.CLIENTE,
+      active: false,
+    },
+  ];
+
+  static readonly usuariosAdmin: IMenuItem[] = [
+    {
+      icon: 'account_circle',
+      title: 'Usuários',
+      open: false,
+      children: [
+        ...MenuItems.usuariosTec,
+        {
+          icon: 'badge',
+          title: 'Funcionarios',
+          route: RouteUtils.PAGES.FUNCIONARIO,
+          active: false,
+        },
+      ],
+    },
+  ];
+
   static readonly items: IMenuItem[] = [
     { icon: 'home', title: 'Home', route: 'home', active: false },
     {
       icon: 'assignment',
       title: 'Ordens de Serviço',
-      route: 'os',
+      route: RouteUtils.PAGES.ORDEM_DE_SERVICO,
       active: false,
     },
     {
@@ -30,11 +57,6 @@ export class MenuItems {
         { icon: 'sell', title: 'Marcas', route: 'marcas', active: false },
       ],
     },
-    {
-      icon: 'account_circle',
-      title: 'Usuários',
-      route: 'users',
-      active: false,
-    },
+    ...MenuItems.usuariosAdmin,
   ];
 }

@@ -1,3 +1,7 @@
+.mat-nav-list {
+  margin-right: 1px;
+}
+
 ::ng-deep .mat-mdc-list-item-unscoped-content {
   display: flex;
   align-items: center;
@@ -9,12 +13,17 @@
   }
 }
 
+a[mat-list-item] {
+  border-radius: 100px;
+}
+
 .icons-item, .desc-title {
   color: #3f3f3f;
   font-weight: 400;
 }
 
 .desc-title {
+  font-size: 14px;
   margin-left: 8px;
 }
 

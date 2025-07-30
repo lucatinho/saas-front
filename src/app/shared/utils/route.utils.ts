@@ -3,5 +3,8 @@ export class RouteUtils {
     LOGIN: 'login',
     HOME: 'home',
     MARCA: 'marca',
+    CLIENTE: 'clientes',
+    FUNCIONARIO: 'funcionarios',
+    ORDEM_DE_SERVICO: 'ordem-servico',
   };
 }

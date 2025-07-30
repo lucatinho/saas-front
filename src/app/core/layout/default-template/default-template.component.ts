@@ -52,9 +52,9 @@ export class DefaultTemplateComponent implements AfterViewInit {
   private sideNavMenuController(status: boolean): void {
     this.sideNavMenuOpen = status;
     if (status) {
-      this.drawer.open();
+      this.drawer.open().then();
     } else {
-      this.drawer.close();
+      this.drawer.close().then();
     }
   }
 }

@@ -1,4 +1,4 @@
-<mat-nav-list>
+<mat-nav-list class="mat-nav-list">
   @for (item of items; track item.title) {
     @if (!item.children) {
       <a mat-list-item [routerLink]="item.route" [ngClass]="{ 'active-menu-item': item.active }"

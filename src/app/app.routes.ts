@@ -12,10 +12,24 @@ export const routes: Routes = [
     path: '',
     canActivateChild: [AuthGuard],
     loadComponent: () =>
-      import(
-        './core/layout/default-template/default-template.component'
-      ).then((m) => m.DefaultTemplateComponent),
+      import('./core/layout/default-template/default-template.component').then(
+        (m) => m.DefaultTemplateComponent,
+      ),
     children: [
+      {
+        path: RouteUtils.PAGES.CLIENTE,
+        loadComponent: () =>
+          import('./pages/users/customers/customers.component').then(
+            (m) => m.CustomersComponent,
+          ),
+      },
+      {
+        path: RouteUtils.PAGES.FUNCIONARIO,
+        loadComponent: () =>
+          import('./pages/users/employees/employees.component').then(
+            (m) => m.EmployeesComponent,
+          ),
+      },
       {
         path: RouteUtils.PAGES.MARCA,
         loadComponent: () =>
