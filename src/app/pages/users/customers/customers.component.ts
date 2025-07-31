@@ -10,27 +10,29 @@ import { ITableColumn } from '../../../shared/interfaces/ITableColumn.interface'
 })
 export class CustomersComponent {
   columns: ITableColumn[] = [
-    { key: 'id', label: 'ID' },
-    { key: 'nome', label: 'Nome' },
-    { key: 'email', label: 'Email' },
-    { key: 'telefone', label: 'Telefone' },
-    { key: 'endereco', label: 'Endereço' },
+    { key: 'id', label: 'ID', minWidth: 50, priority: 2 },
+    { key: 'nome', label: 'Nome', minWidth: 120, priority: 1, maxChars: 18 },
+    { key: 'email', label: 'Email', minWidth: 180, priority: 5 },
+    { key: 'telefone', label: 'Telefone', minWidth: 120, priority: 3 },
+    { key: 'endereco', label: 'Endereço', minWidth: 180, priority: 4 },
     {
       key: 'actions',
       label: 'Ações',
+      minWidth: 100,
+      priority: 1,
       actions: [
         {
           icon: 'edit',
           type: 'edit',
           tooltip: 'Editar',
-          click: (itemSelecionado) =>
+          click: (itemSelecionado: PeriodicElement) =>
             this.editarItemSelecionado(itemSelecionado),
         },
         {
           icon: 'delete',
           type: 'delete',
           tooltip: 'Excluir',
-          click: (itemSelecionado) =>
+          click: (itemSelecionado: PeriodicElement) =>
             this.excluirItemSelecionado(itemSelecionado),
         },
       ],
@@ -39,15 +41,11 @@ export class CustomersComponent {
 
   data = ELEMENT_DATA;
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  editarItemSelecionado(item) {
+  editarItemSelecionado(item: PeriodicElement) {
     console.log(item);
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  excluirItemSelecionado(item) {
+  excluirItemSelecionado(item: PeriodicElement) {
     console.log(item);
   }
 }
@@ -77,7 +75,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   },
   {
     id: 3,
-    nome: 'Carlos Pereira',
+    nome: 'Carlos Pereira Pereira Pereira Pereira',
     email: 'carlos.pereira@email.com',
     telefone: '(31) 97777-3333',
     endereco: 'Praça Central, 789',

@@ -1,8 +1,10 @@
 export interface ITableColumn {
   key: string;
   label: string;
-  // minWidth: number;
-  // priority: number;
+  minWidth: number;
+  priority: number;
+  maxWidth?: number;
+  maxChars?: number;
   actions?: ITableColumnActions[];
 }
 
@@ -11,5 +13,6 @@ export interface ITableColumnActions {
   // color: string;
   type: string;
   tooltip: string;
-  click: (item: undefined) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  click: (item: any) => void;
 }

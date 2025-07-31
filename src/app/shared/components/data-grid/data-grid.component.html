@@ -1,29 +1,44 @@
-<table mat-table [dataSource]="dataSource" matSort>
-  @for (column of columns(); track column.key) {
-    <ng-container [matColumnDef]="column.key">
-      @if (column.key !== 'actions') {
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ column.label }}
-        </th>
-      } @else {
-        <th mat-header-cell *matHeaderCellDef>
-          {{ column.label }}
-        </th>
-      }
-      <td mat-cell *matCellDef="let element">
-        @if (column.key === 'actions') {
-          @for (action of column.actions; track action.type) {
-            <button mat-icon-button [matTooltip]="action.tooltip" (click)="action.click(element)">
-              <mat-icon>{{ action.icon }}</mat-icon>
-            </button>
-          }
+<div #tableContainer style="width: 100%; overflow-x: auto">
+  <table mat-table [dataSource]="dataSource" matSort>
+    @for (column of columns(); track column.key) {
+      <ng-container [matColumnDef]="column.key">
+        @if (column.key !== 'actions') {
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ column.label }}
+          </th>
         } @else {
-          {{ element[column.key] }}
+          <th mat-header-cell *matHeaderCellDef>
+            {{ column.label }}
+          </th>
         }
-      </td>
-    </ng-container>
-  }
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        <td mat-cell *matCellDef="let element">
+          @if (column.key === 'actions') {
+            @for (action of column.actions; track action.type) {
+              <button
+                mat-icon-button
+                [matTooltip]="action.tooltip"
+                (click)="action.click(element)">
+                <mat-icon>{{ action.icon }}</mat-icon>
+              </button>
+            }
+          } @else {
+            <div
+              class="truncate"
+              [matTooltip]="shouldShowTooltip(element[column.key], column.maxChars) ? element[column.key] : ''"
+              [style.max-width.px]="column.maxWidth"
+            >
+              {{ getTruncatedText(element[column.key], column.maxChars) }}
+            </div>
+          }
+        </td>
+      </ng-container>
+    }
+    <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
+  </table>
+</div>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  [pageSize]="10"
+  showFirstLastButtons>
+</mat-paginator>
