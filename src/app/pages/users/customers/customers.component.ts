@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { DataGridComponent } from '../../../shared/components/data-grid/data-grid.component';
 import { ITableColumn } from '../../../shared/interfaces/ITableColumn.interface';
+import { MatFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-customers',
-  imports: [DataGridComponent],
+  imports: [DataGridComponent, MatIcon, MatFabButton],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
 })

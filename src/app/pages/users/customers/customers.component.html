@@ -1,6 +1,12 @@
-<h2>Clientes</h2>
-<div class="filtros mat-elevation-z2">teste</div>
-<div class="mat-elevation-z5 round mb-2">
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <h2 class="mb-0">Clientes</h2>
+  <button matFab extended aria-label="Button menu" class="btn-add">
+    <mat-icon class="icon menu">add_circle</mat-icon>
+    Adicionar
+  </button>
+</div>
+<!--<div class="filtros mat-elevation-z2 mb-3">teste</div>-->
+<div class="mat-elevation-z8 round mb-2">
   <app-data-grid [columns]="columns" [data]="data"></app-data-grid>
 </div>
 

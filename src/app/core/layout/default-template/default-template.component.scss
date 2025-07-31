@@ -5,6 +5,12 @@
     width: 359px;
     max-width: 75%;
     background-color: white;
+    border: 1px solid #e7e7e7;
+
+    &.mat-drawer-side {
+      border-radius: 0;
+    }
+
   }
 
   .content-template {
@@ -14,6 +20,7 @@
     &.side {
       margin: 20px;
       border-radius: 8px;
+
     }
   }
 }

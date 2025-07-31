@@ -103,6 +103,5 @@ export class DataGridComponent implements OnInit, AfterViewInit {
         .map((c) => c.key)
         .filter((key) => visibleKeys.includes(key)),
     );
-    console.log(this.displayedColumns());
   }
 }
