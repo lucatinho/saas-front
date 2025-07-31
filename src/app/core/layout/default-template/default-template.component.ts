@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, inject, signal, ViewChild} from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
@@ -22,7 +22,7 @@ import { MenuComponent } from '../menu/menu.component';
 export class DefaultTemplateComponent implements AfterViewInit {
   @ViewChild('drawer') drawer!: MatDrawer;
 
-  menuStyle: MatDrawerMode = 'side';
+  menuStyle = signal<MatDrawerMode>('side') ;
   sideNavMenuOpen = true;
 
   private breakpointObserver = inject(BreakpointObserver);
@@ -32,10 +32,10 @@ export class DefaultTemplateComponent implements AfterViewInit {
       .observe([Breakpoints.Handset])
       .subscribe((result) => {
         if (result.matches) {
-          this.menuStyle = 'over';
+          this.menuStyle.set('over');
           this.sideNavMenuController(false);
         } else {
-          this.menuStyle = 'side';
+          this.menuStyle.set('side');
           this.sideNavMenuController(true);
         }
       });
@@ -46,7 +46,7 @@ export class DefaultTemplateComponent implements AfterViewInit {
   }
 
   selectedItemMenu(): void {
-    if (this.menuStyle === 'over') this.sideNavMenuController(false);
+    if (this.menuStyle() === 'over') this.sideNavMenuController(false);
   }
 
   private sideNavMenuController(status: boolean): void {
