@@ -1,4 +1,10 @@
 <div #tableContainer style="width: 100%; overflow-x: auto">
+  @if (showPesquisar) {
+    <mat-form-field class="px-3 pt-3 w-100" appearance="outline">
+      <mat-label>Pesquisar na tabela</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Nome, Email, ID. Ex: Mia">
+    </mat-form-field>
+  }
   <table mat-table [dataSource]="dataSource" matSort>
     @for (column of columns(); track column.key) {
       <ng-container [matColumnDef]="column.key">

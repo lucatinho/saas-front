@@ -15,6 +15,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 import { ITableColumn } from '../../interfaces/ITableColumn.interface';
 import { debounceTime, Subject } from 'rxjs';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 
 @Component({
   selector: 'app-data-grid',
@@ -25,6 +26,10 @@ import { debounceTime, Subject } from 'rxjs';
     MatIconButton,
     MatTooltip,
     MatIcon,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatFormField,
   ],
   templateUrl: './data-grid.component.html',
   styleUrl: './data-grid.component.scss',
@@ -38,6 +43,8 @@ export class DataGridComponent implements OnInit, AfterViewInit {
   data = input.required<unknown[]>();
   displayedColumns = signal<string[]>([]);
   dataSource = new MatTableDataSource();
+
+  showPesquisar = false;
 
   private resizeSubject = new Subject<void>();
 
@@ -54,6 +61,15 @@ export class DataGridComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   getTruncatedText(value: string, maxChars?: number): string {
