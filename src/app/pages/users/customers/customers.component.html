@@ -1,12 +1,37 @@
-<div class="d-flex align-items-center justify-content-between mb-4">
-  <h2 class="mb-0">Clientes</h2>
-  <button matFab extended aria-label="Button menu" class="btn-add">
-    <mat-icon class="icon menu">add_circle</mat-icon>
-    Adicionar
-  </button>
+<div class="filtros mat-elevation-z8 mb-3">
+  <div class="header-filter mb-2">
+    <div class="space"></div>
+    <h3 class="mb-0">Clientes</h3>
+    <button matIconButton class="btn-add" matTooltip="Adicionar" aria-label="Botão para adicionar">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Carlos">
+    </mat-form-field>
+    <mat-form-field class="col-md-3 col-6" appearance="outline">
+      <mat-label>Data de inicio</mat-label>
+      <input matInput type="date" (keyup)="applyFilter($event)" placeholder="dd/mm/aaaa">
+    </mat-form-field>
+    <mat-form-field class="col-md-3 col-6" appearance="outline">
+      <mat-label>Data de fim</mat-label>
+      <input matInput type="date" (keyup)="applyFilter($event)" placeholder="dd/mm/aaaa">
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-md-4" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" (keyup)="applyFilter($event)" placeholder="joao.silva@email.com">
+    </mat-form-field>
+    <mat-form-field class="col-md-4" appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput type="cel" (keyup)="applyFilter($event)" placeholder="(11) 999999999">
+    </mat-form-field>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button matButton="filled" class="btn-filter">Filtrar</button>
+  </div>
 </div>
-<!--<div class="filtros mat-elevation-z2 mb-3">teste</div>-->
-<div class="mat-elevation-z8 round mb-2">
-  <app-data-grid [columns]="columns" [data]="data"></app-data-grid>
-</div>
-
+<app-data-grid-elevation [columns]="columns" [data]="data"></app-data-grid-elevation>

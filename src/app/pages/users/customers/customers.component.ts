@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
-import { DataGridComponent } from '../../../shared/components/data-grid/data-grid.component';
 import { ITableColumn } from '../../../shared/interfaces/ITableColumn.interface';
-import { MatFabButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { DataGridElevationComponent } from '../../../shared/components/data-grid-elevation/data-grid-elevation.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-customers',
-  imports: [DataGridComponent, MatIcon, MatFabButton],
+  imports: [
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    DataGridElevationComponent,
+    MatButton,
+    MatIconButton,
+    MatTooltip,
+  ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
 })
@@ -24,24 +35,28 @@ export class CustomersComponent {
       priority: 1,
       actions: [
         {
+          icon: 'visibility',
+          type: 'visibility',
+          tooltip: 'Ver',
+          click: (itemSelecionado: PeriodicElement) =>
+            this.excluirItemSelecionado(itemSelecionado),
+        },
+        {
           icon: 'edit',
           type: 'edit',
           tooltip: 'Editar',
           click: (itemSelecionado: PeriodicElement) =>
             this.editarItemSelecionado(itemSelecionado),
         },
-        {
-          icon: 'delete',
-          type: 'delete',
-          tooltip: 'Excluir',
-          click: (itemSelecionado: PeriodicElement) =>
-            this.excluirItemSelecionado(itemSelecionado),
-        },
       ],
     },
   ];
 
   data = ELEMENT_DATA;
+
+  applyFilter(event: Event): void {
+    console.log(event);
+  }
 
   editarItemSelecionado(item: PeriodicElement) {
     console.log(item);

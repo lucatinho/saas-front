@@ -5,3 +5,10 @@ button:focus, .btn {
 .btn {
   box-shadow: none !important;
 }
+
+button.mdc-icon-button {
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

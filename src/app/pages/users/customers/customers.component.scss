@@ -1,6 +1,25 @@
+.header-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space {
+  height: 1px;
+  width: 38px;
+}
+
 .btn-add {
-  background-color: #54C795;
-  color: white;
+  margin-left: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  color: var(--green);
+}
+
+.btn-filter {
+  border-radius: 8px;
+  background-color: var(--primary-color) !important;
 }
 
 .filtros {
@@ -8,9 +27,5 @@
   border-radius: 5px;
   width: 100%;
   margin-right: 20px;
-}
-
-.round {
-  border-radius: 8px !important;
-  overflow: hidden;
+  padding: 12px;
 }
