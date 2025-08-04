@@ -17,10 +17,14 @@
   color: var(--green);
 }
 
-.btn-filter {
+.btn-form {
   border-radius: 8px;
-  background-color: var(--primary-color) !important;
+
+  &.btn-filter {
+    background-color: var(--primary-color) !important;
+  }
 }
+
 
 .filtros {
   flex-grow: 1;

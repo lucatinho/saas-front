@@ -3,13 +3,19 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
   isDevMode,
+  LOCALE_ID,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { registerLocaleData } from '@angular/common';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
 
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
+
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt, 'pt-BR');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +27,6 @@ export const appConfig: ApplicationConfig = {
       registrationStrategy: 'registerWhenStable:30000',
     }),
     provideHotToastConfig(),
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
 };

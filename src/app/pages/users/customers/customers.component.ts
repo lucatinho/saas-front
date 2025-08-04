@@ -1,27 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ITableColumn } from '../../../shared/interfaces/ITableColumn.interface';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import {
+  MatFormField,
+  MatInputModule,
+  MatLabel,
+} from '@angular/material/input';
 import { DataGridElevationComponent } from '../../../shared/components/data-grid-elevation/data-grid-elevation.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { DateMaskDirective } from '../../../shared/directives/date-mask.directive';
+import { PhoneMaskDirective } from '../../../shared/directives/phone-mask.directive';
 
 @Component({
   selector: 'app-customers',
+  providers: [provideNativeDateAdapter()],
   imports: [
     MatIcon,
     MatFormField,
     MatLabel,
-    MatInput,
+    MatInputModule,
     DataGridElevationComponent,
     MatButton,
     MatIconButton,
     MatTooltip,
+    MatSelect,
+    MatOption,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    DateMaskDirective,
+    PhoneMaskDirective,
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
 })
-export class CustomersComponent {
+export class CustomersComponent implements OnInit {
+  form: FormGroup = new FormGroup({
+    nome: new FormControl(),
+  });
   columns: ITableColumn[] = [
     { key: 'id', label: 'ID', minWidth: 50, priority: 2 },
     { key: 'nome', label: 'Nome', minWidth: 120, priority: 1, maxChars: 18 },
@@ -54,8 +80,40 @@ export class CustomersComponent {
 
   data = ELEMENT_DATA;
 
-  applyFilter(event: Event): void {
-    console.log(event);
+  options = [
+    { value: 2, viewValue: 'Todos' },
+    { value: 1, viewValue: 'Ativos' },
+    { value: 0, viewValue: 'Desativados' },
+  ];
+
+  private fb = inject(FormBuilder);
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      nome: ['', [Validators.minLength(3), Validators.maxLength(30)]],
+      dataInicio: [null],
+      dataFim: [null],
+      email: ['', [Validators.minLength(5), Validators.maxLength(40)]],
+      telefone: ['', [Validators.minLength(14)]],
+      situacao: [2, [Validators.required]],
+    });
+  }
+
+  filtrar(): void {
+    if (this.form.valid) {
+      // Faça o filtro
+      console.log(this.form.value);
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
+  limparFormulario(): void {
+    this.form.reset();
+  }
+
+  addUser(): void {
+    console.log('add user');
   }
 
   editarItemSelecionado(item: PeriodicElement) {
