@@ -13,11 +13,15 @@
     </mat-form-field>
     <mat-form-field class="col-md-3 col-6" appearance="outline">
       <mat-label>Data de inicio</mat-label>
-      <input matInput type="date" (keyup)="applyFilter($event)" placeholder="dd/mm/aaaa">
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="col-md-3 col-6" appearance="outline">
       <mat-label>Data de fim</mat-label>
-      <input matInput type="date" (keyup)="applyFilter($event)" placeholder="dd/mm/aaaa">
+      <input matInput [matDatepicker]="picker2">
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
   </div>
   <div class="row">
@@ -28,6 +32,14 @@
     <mat-form-field class="col-md-4" appearance="outline">
       <mat-label>Telefone</mat-label>
       <input matInput type="cel" (keyup)="applyFilter($event)" placeholder="(11) 999999999">
+    </mat-form-field>
+    <mat-form-field class="col-md-4" appearance="outline">
+      <mat-label>Situação</mat-label>
+      <mat-select>
+        @for (option of options; track option) {
+          <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
   </div>
   <div class="d-flex justify-content-end">
