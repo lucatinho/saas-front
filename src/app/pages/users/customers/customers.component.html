@@ -2,16 +2,16 @@
   <div class="header-filter mb-2">
     <div class="space"></div>
     <h3 class="mb-0">Clientes</h3>
-    <button (click)="addUser()" matIconButton class="btn-add" matTooltip="Adicionar"
-            aria-label="Botão para adicionar">
+    <button aria-label="Botão para adicionar" class="btn-add" matIconButton matTooltip="Adicionar" type="button"
+            (click)="addUser()">
       <mat-icon>add_circle</mat-icon>
     </button>
   </div>
   <form [formGroup]="form" (ngSubmit)="filtrar()">
     <div class="row">
-      <mat-form-field class="col-md-6" appearance="outline">
+      <mat-form-field appearance="outline" class="col-md-6">
         <mat-label>Nome</mat-label>
-        <input matInput type="text" formControlName="nome" placeholder="Carlos">
+        <input formControlName="nome" matInput placeholder="Carlos" type="text">
         @if (form.get('nome')!.hasError('minlength') && (form.get('nome')?.dirty || form.get('nome')?.touched)) {
           <mat-error>Nome deve ter pelo menos 3 caracteres</mat-error>
         }
@@ -19,29 +19,29 @@
           <mat-error>Nome deve ter no máximo 30 caracteres</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="col-md-3 col-6" appearance="outline">
+      <mat-form-field appearance="outline" class="col-md-3 col-6">
         <mat-label>Data de inicio</mat-label>
         <input
-          matInput
           appDateMask
-          placeholder="DD/MM/YYYY"
           formControlName="dataInicio"
+          matInput
+          placeholder="DD/MM/YYYY"
           [matDatepicker]="picker"
         />
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"/>
+        <mat-datepicker #picker/>
       </mat-form-field>
-      <mat-form-field class="col-md-3 col-6" appearance="outline">
+      <mat-form-field appearance="outline" class="col-md-3 col-6">
         <mat-label>Data de fim</mat-label>
-        <input matInput appDateMask [matDatepicker]="picker2" formControlName="dataFim">
-        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
+        <input appDateMask formControlName="dataFim" matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"/>
+        <mat-datepicker #picker2/>
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field class="col-md-4" appearance="outline">
+      <mat-form-field appearance="outline" class="col-md-4">
         <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" placeholder="joao.silva@email.com">
+        <input formControlName="email" matInput placeholder="joao.silva@email.com" type="email">
         @if (form.get('email')!.hasError('minlength') && (form.get('email')?.dirty || form.get('email')?.touched)) {
           <mat-error>Email deve ter pelo menos 5 caracteres</mat-error>
         }
@@ -49,14 +49,14 @@
           <mat-error>Email deve ter no máximo 40 caracteres</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
+      <mat-form-field appearance="outline" class="col-md-4">
         <mat-label>Telefone</mat-label>
-        <input matInput appPhoneMask type="tel" formControlName="telefone" placeholder="(11) 99999-9999">
+        <input appPhoneMask formControlName="telefone" matInput placeholder="(11) 99999-9999" type="tel">
         @if (form.get('telefone')!.hasError('minlength') && (form.get('telefone')?.dirty || form.get('telefone')?.touched)) {
           <mat-error>Telefone deve ter pelo menos 10 números</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="col-md-4" appearance="outline">
+      <mat-form-field appearance="outline" class="col-md-4">
         <mat-label>Situação</mat-label>
         <mat-select formControlName="situacao">
           @for (option of options; track option) {
@@ -69,10 +69,10 @@
       </mat-form-field>
     </div>
     <div class="d-flex justify-content-end">
-      <button matButton="tonal" class="btn-form me-2" type="button" (click)="limparFormulario()">Limpar</button>
-      <button matButton="filled" class="btn-form btn-filter" type="submit">Filtrar</button>
+      <button class="btn-form me-2" matButton="tonal" type="button" (click)="limparFormulario()">Limpar</button>
+      <button class="btn-form btn-filter" matButton="filled" type="submit">Filtrar</button>
     </div>
   </form>
 </div>
 
-<app-data-grid-elevation [columns]="columns" [data]="data"></app-data-grid-elevation>
+<app-data-grid-elevation [columns]="columns" [data]="data"/>

@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ITableColumn } from '../../../shared/interfaces/ITableColumn.interface';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -7,6 +12,7 @@ import {
   MatInputModule,
   MatLabel,
 } from '@angular/material/input';
+// eslint-disable-next-line max-len
 import { DataGridElevationComponent } from '../../../shared/components/data-grid-elevation/data-grid-elevation.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -43,6 +49,7 @@ import { PhoneMaskDirective } from '../../../shared/directives/phone-mask.direct
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomersComponent implements OnInit {
   form: FormGroup = new FormGroup({
@@ -116,22 +123,22 @@ export class CustomersComponent implements OnInit {
     console.log('add user');
   }
 
-  editarItemSelecionado(item: PeriodicElement) {
+  editarItemSelecionado(item: PeriodicElement): void {
     console.log(item);
   }
 
-  excluirItemSelecionado(item: PeriodicElement) {
+  excluirItemSelecionado(item: PeriodicElement): void {
     console.log(item);
   }
 }
 
-interface PeriodicElement {
+type PeriodicElement = {
   id: number;
   nome: string;
   email: string;
   telefone: string;
   endereco: string;
-}
+};
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {

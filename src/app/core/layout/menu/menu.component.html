@@ -1,25 +1,25 @@
 <mat-nav-list class="mat-nav-list">
   @for (item of items; track item.title) {
     @if (!item.children) {
-      <a mat-list-item [routerLink]="item.route" [ngClass]="{ 'active-menu-item': item.active }"
+      <a mat-list-item [ngClass]="{ 'active-menu-item': item.active }" [routerLink]="item.route"
          (click)="itemClicked()">
-        <mat-icon [fontSet]="item.active ? 'material-icons' : 'material-icons-outlined'"
-                  class="icons-item">{{ item.icon }}
+        <mat-icon class="icons-item"
+                  [fontSet]="item.active ? 'material-icons' : 'material-icons-outlined'">{{ item.icon }}
         </mat-icon>
         <span class="desc-title">{{ item.title }}</span> </a>
     } @else {
       <mat-expansion-panel [expanded]="item.open">
         <mat-expansion-panel-header [ngClass]="{ 'active-menu-item': item.open }">
-          <mat-icon [fontSet]="item.open ? 'material-icons' : 'material-icons-outlined'"
-                    class="icons-item">{{ item.icon }}
+          <mat-icon class="icons-item"
+                    [fontSet]="item.open ? 'material-icons' : 'material-icons-outlined'">{{ item.icon }}
           </mat-icon>
           <span class="desc-title">{{ item.title }}</span></mat-expansion-panel-header>
         <mat-nav-list class="child-list">
           @for (child of item.children; track child.title) {
-            <a mat-list-item [routerLink]="child.route" [ngClass]="{ 'active-menu-item': child.active }"
+            <a mat-list-item [ngClass]="{ 'active-menu-item': child.active }" [routerLink]="child.route"
                (click)="itemClicked()">
-              <mat-icon [fontSet]="child.active ? 'material-icons' : 'material-icons-outlined'"
-                        class="icons-item">{{ child.icon }}
+              <mat-icon class="icons-item"
+                        [fontSet]="child.active ? 'material-icons' : 'material-icons-outlined'">{{ child.icon }}
               </mat-icon>
               <span class="desc-title">{{ child.title }}</span> </a>
           }

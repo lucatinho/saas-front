@@ -18,7 +18,7 @@ export class PhoneMaskDirective {
   onInput(event: Event): void {
     let value = this.el.value.replace(/\D/g, '');
 
-    if (value.length > 11) value = value.substring(0, 11);
+    if (value.length > 11) {value = value.substring(0, 11);}
 
     if (value.length > 10) {
       value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');

@@ -1,11 +1,11 @@
-<app-header (sideNavMenuOpen)="buttonHeaderMenu()"></app-header>
+<app-header (sideNavMenuOpen)="buttonHeaderMenu()"/>
 <mat-drawer-container class="sidenavBarPage" [hasBackdrop]="menuStyle() === 'over'">
-  <mat-drawer class="sidenavBar" #drawer [mode]="menuStyle()">
-    <app-menu (selectedItem)="selectedItemMenu()"></app-menu>
+  <mat-drawer #drawer class="sidenavBar" [mode]="menuStyle()">
+    <app-menu (selectedItem)="selectedItemMenu()"/>
   </mat-drawer>
   <mat-drawer-content>
-    <div [class.side]="menuStyle() === 'side'" class="mat-elevation-z7 content-template">
-      <router-outlet></router-outlet>
+    <div class="mat-elevation-z7 content-template" [class.side]="menuStyle() === 'side'">
+      <router-outlet/>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

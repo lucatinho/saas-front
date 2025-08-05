@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'app-marca',
   imports: [],
   templateUrl: './marca.component.html',
-  styleUrl: './marca.component.scss'
+  styleUrl: './marca.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MarcaComponent {
 

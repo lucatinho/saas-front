@@ -1,11 +1,12 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   input,
   OnInit,
   signal,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -15,7 +16,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 import { ITableColumn } from '../../interfaces/ITableColumn.interface';
 import { debounceTime, Subject } from 'rxjs';
-import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 
 @Component({
   selector: 'app-data-grid',
@@ -33,15 +34,16 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
   ],
   templateUrl: './data-grid.component.html',
   styleUrl: './data-grid.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataGridComponent implements OnInit, AfterViewInit {
-  @ViewChild('tableContainer', { static: true }) tableContainer!: ElementRef;
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
-  @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator();
+  readonly tableContainer = viewChild<ElementRef>('tableContainer');
+  readonly sort = viewChild(MatSort);
+  readonly paginator = viewChild(MatPaginator);
 
-  columns = input.required<ITableColumn[]>();
-  data = input.required<unknown[]>();
-  displayedColumns = signal<string[]>([]);
+  readonly columns = input.required<ITableColumn[]>();
+  readonly data = input.required<unknown[]>();
+  readonly displayedColumns = signal<string[]>([]);
   dataSource = new MatTableDataSource();
 
   showPesquisar = false;
@@ -59,8 +61,8 @@ export class DataGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator()!;
+    this.dataSource.sort = this.sort()!;
   }
 
   applyFilter(event: Event): void {
@@ -73,8 +75,12 @@ export class DataGridComponent implements OnInit, AfterViewInit {
   }
 
   getTruncatedText(value: string, maxChars?: number): string {
-    if (!value) return '';
-    if (!maxChars || value.length <= maxChars) return value;
+    if (!value) {
+      return '';
+    }
+    if (!maxChars || value.length <= maxChars) {
+      return value;
+    }
     return value.substring(0, maxChars).trimEnd() + '...';
   }
 
@@ -87,11 +93,11 @@ export class DataGridComponent implements OnInit, AfterViewInit {
       this.resizeSubject.next();
     });
 
-    resizeObserver.observe(this.tableContainer.nativeElement);
+    resizeObserver.observe(this.tableContainer()!.nativeElement);
   }
 
   private updateDisplayedColumns(): void {
-    const availableWidth = this.tableContainer.nativeElement.offsetWidth;
+    const availableWidth = this.tableContainer()!.nativeElement.offsetWidth;
 
     // Colunas fixas (prioridade 1) e removíveis (prioridade > 1)
     const fixedColumns = this.columns().filter((c) => c.priority === 1);

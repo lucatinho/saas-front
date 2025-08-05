@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import {ChangeDetectionStrategy, Component, output} from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 
@@ -7,9 +7,10 @@ import { MatIconButton } from '@angular/material/button';
   imports: [MatIcon, MatIconButton],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  sideNavMenuOpen = output();
+  readonly sideNavMenuOpen = output();
 
   menuButton(): void {
     this.sideNavMenuOpen.emit();

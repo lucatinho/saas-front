@@ -1,4 +1,4 @@
-export interface ITableColumn {
+export type ITableColumn = {
   key: string;
   label: string;
   minWidth: number;
@@ -8,7 +8,7 @@ export interface ITableColumn {
   actions?: ITableColumnActions[];
 }
 
-export interface ITableColumnActions {
+export type ITableColumnActions = {
   icon: string;
   // color: string;
   type: string;

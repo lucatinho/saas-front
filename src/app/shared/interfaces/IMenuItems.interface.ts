@@ -1,4 +1,4 @@
-export interface IMenuItem {
+export type IMenuItem = {
   icon: string;
   title: string;
   route?: string;

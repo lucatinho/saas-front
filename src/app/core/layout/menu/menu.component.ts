@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, output} from '@angular/core';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
@@ -22,10 +22,11 @@ import { MenuItems } from '../../../shared/utils/menu-items.utils';
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {
   items: IMenuItem[] = MenuItems.items;
-  selectedItem = output();
+  readonly selectedItem = output();
   private router = inject(Router);
 
   constructor() {

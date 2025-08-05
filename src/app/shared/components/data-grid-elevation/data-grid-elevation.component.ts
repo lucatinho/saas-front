@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import { DataGridComponent } from '../data-grid/data-grid.component';
 import { ITableColumn } from '../../interfaces/ITableColumn.interface';
 
@@ -7,8 +7,9 @@ import { ITableColumn } from '../../interfaces/ITableColumn.interface';
   imports: [DataGridComponent],
   templateUrl: './data-grid-elevation.component.html',
   styleUrl: './data-grid-elevation.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataGridElevationComponent {
-  columns = input.required<ITableColumn[]>();
-  data = input.required<unknown[]>();
+  readonly columns = input.required<ITableColumn[]>();
+  readonly data = input.required<unknown[]>();
 }
