@@ -6,7 +6,7 @@ export class MenuItems {
     {
       icon: 'group',
       title: 'Clientes',
-      route: RouteUtils.PAGES.CLIENTE,
+      route: RouteUtils.PAGES.CLIENTES,
       active: false,
     },
   ];

@@ -27,6 +27,9 @@ import {
 } from '@angular/forms';
 import { DateMaskDirective } from '../../../shared/directives/date-mask.directive';
 import { PhoneMaskDirective } from '../../../shared/directives/phone-mask.directive';
+import { Router } from '@angular/router';
+import { RouteUtils } from '../../../shared/utils/route.utils';
+import { ViewFormType } from '../../../shared/enums/viewForm-type.enum';
 
 @Component({
   selector: 'app-customers',
@@ -72,7 +75,7 @@ export class CustomersComponent implements OnInit {
           type: 'visibility',
           tooltip: 'Ver',
           click: (itemSelecionado: PeriodicElement) =>
-            this.excluirItemSelecionado(itemSelecionado),
+            this.verItemSelecionado(itemSelecionado),
         },
         {
           icon: 'edit',
@@ -94,6 +97,7 @@ export class CustomersComponent implements OnInit {
   ];
 
   private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -120,15 +124,24 @@ export class CustomersComponent implements OnInit {
   }
 
   addUser(): void {
-    console.log('add user');
+    this.router.navigate(
+      [RouteUtils.PAGES.USER_ADD_EDIT.replace(':id', String(-1))],
+      { queryParams: { view: ViewFormType.NEW } },
+    );
   }
 
   editarItemSelecionado(item: PeriodicElement): void {
-    console.log(item);
+    this.router.navigate(
+      [RouteUtils.PAGES.USER_ADD_EDIT.replace(':id', String(item.id))],
+      { queryParams: { view: ViewFormType.EDIT } },
+    );
   }
 
-  excluirItemSelecionado(item: PeriodicElement): void {
-    console.log(item);
+  verItemSelecionado(item: PeriodicElement): void {
+    this.router.navigate(
+      [RouteUtils.PAGES.USER_ADD_EDIT.replace(':id', String(item.id))],
+      { queryParams: { view: ViewFormType.VIEW } },
+    );
   }
 }
 

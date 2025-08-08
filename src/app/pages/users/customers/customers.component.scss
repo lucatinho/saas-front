@@ -1,3 +1,10 @@
+.filtros {
+  border-radius: 5px;
+  width: 100%;
+  margin-right: 20px;
+  padding: 12px;
+}
+
 .header-filter {
   display: flex;
   justify-content: center;
@@ -19,17 +26,4 @@
 
 .btn-form {
   border-radius: 8px;
-
-  &.btn-filter {
-    background-color: var(--primary-color) !important;
-  }
-}
-
-
-.filtros {
-  flex-grow: 1;
-  border-radius: 5px;
-  width: 100%;
-  margin-right: 20px;
-  padding: 12px;
 }

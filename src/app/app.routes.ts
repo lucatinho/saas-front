@@ -17,10 +17,17 @@ export const routes: Routes = [
       ),
     children: [
       {
-        path: RouteUtils.PAGES.CLIENTE,
+        path: RouteUtils.PAGES.CLIENTES,
         loadComponent: () =>
           import('./pages/users/customers/customers.component').then(
             (m) => m.CustomersComponent,
+          ),
+      },
+      {
+        path: RouteUtils.PAGES.USER_ADD_EDIT,
+        loadComponent: () =>
+          import('./pages/users/user-wrinting/user-wrinting.component').then(
+            (m) => m.UserWrintingComponent,
           ),
       },
       {

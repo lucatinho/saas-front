@@ -1,0 +1,16 @@
+<div class="inputs mat-elevation-z8 mb-3">
+  <h3 class="text-center">
+    @switch (addEditView()) {
+      @case (ViewFormType.EDIT) {
+        Editar
+      }
+      @case (ViewFormType.NEW) {
+        Adicionar
+      }
+    } {{ title() }}</h3>
+  <ng-content/>
+  <div class="d-flex justify-content-between">
+    <button class="btn-form" matButton="tonal" type="button" (click)="back()">Cancelar</button>
+    <button class="btn-form btn-filter" matButton="filled" type="button" (click)="save()">Salvar</button>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<app-add-edit [addEditView]="viewType" [title]="'Cliente'" (saveEvent)="saveButton()">
+  <form [formGroup]="form">
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>CPF/CNPJ</mat-label>
+        <input appCpfCnpjMask formControlName="cpfCnpj" matInput placeholder="CPF ou CNPJ" type="text">
+        @if (form.get('cpfCnpj')!.hasError('cpfCnpjInvalido')) {
+          <mat-error>CPF ou CNPJ inválido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Nome</mat-label>
+        <input formControlName="nome" matInput placeholder="Nome" type="text">
+        @if (form.get('nome')!.hasError('minlength') && (form.get('nome')?.dirty || form.get('nome')?.touched)) {
+          <mat-error>Nome deve ter pelo menos 3 caracteres</mat-error>
+        }
+        @if (form.get('nome')!.hasError('maxlength') && (form.get('nome')?.dirty || form.get('nome')?.touched)) {
+          <mat-error>Nome deve ter no máximo 30 caracteres</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput placeholder="email@exemplo.com" type="email">
+        @if (form.get('email')!.hasError('email') && (form.get('email')?.dirty || form.get('email')?.touched)) {
+          <mat-error>Email inválido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-4 col-7">
+        <mat-label>Telefone</mat-label>
+        <input appPhoneMask formControlName="telefone" matInput placeholder="(11) 99999-9999" type="tel">
+        @if (form.get('telefone')!.hasError('minlength') && (form.get('telefone')?.dirty || form.get('telefone')?.touched)) {
+          <mat-error>Telefone deve ter pelo menos 10 números</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-2 col-5">
+        <mat-label>Ativo</mat-label>
+        <mat-select formControlName="ativo">
+          <mat-option [value]="true">Sim</mat-option>
+          <mat-option [value]="false">Não</mat-option>
+        </mat-select>
+        @if (form.get('ativo')!.hasError('required') && (form.get('ativo')?.dirty || form.get('ativo')?.touched)) {
+          <mat-error>Campo obrigatório</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>CEP</mat-label>
+        <input formControlName="cep" matInput maxlength="9" placeholder="00000-000" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>Estado</mat-label>
+        <input formControlName="estado" matInput placeholder="Estado" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>Cidade</mat-label>
+        <input formControlName="cidade" matInput placeholder="Cidade" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>Bairro</mat-label>
+        <input formControlName="bairro" matInput placeholder="Bairro" type="text">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-md-5">
+        <mat-label>Rua</mat-label>
+        <input formControlName="rua" matInput placeholder="Rua" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-4">
+        <mat-label>Complemento</mat-label>
+        <input formControlName="complemento" matInput placeholder="Complemento" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>Número</mat-label>
+        <input formControlName="numero" matInput placeholder="Número" type="text">
+      </mat-form-field>
+    </div>
+  </form>
+</app-add-edit>
