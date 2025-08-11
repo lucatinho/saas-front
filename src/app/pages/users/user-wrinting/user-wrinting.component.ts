@@ -21,6 +21,8 @@ import { PhoneMaskDirective } from '../../../shared/directives/phone-mask.direct
 import { CpfCnpjMaskDirective } from '../../../shared/directives/cpf-cnpj-mask.directive';
 import { cpfCnpjValidator } from '../../../shared/validators/cpf-cnpj.validator';
 import { ToastUtils } from '../../../shared/utils/toast.utils';
+import { CepService } from '../../../core/services/cep.service';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-user-wrinting',
@@ -33,6 +35,7 @@ import { ToastUtils } from '../../../shared/utils/toast.utils';
     AddEditComponent,
     PhoneMaskDirective,
     CpfCnpjMaskDirective,
+    NgxMaskDirective,
   ],
   templateUrl: './user-wrinting.component.html',
   styleUrl: './user-wrinting.component.scss',
@@ -42,6 +45,7 @@ export class UserWrintingComponent implements OnInit {
   cod: number;
   viewType: ViewFormType;
   private route = inject(ActivatedRoute);
+  private cepService = inject(CepService);
   private fb = inject(NonNullableFormBuilder);
   form: FormGroup = this.fb.group({
     cpfCnpj: ['', [cpfCnpjValidator, Validators.required]],
@@ -82,6 +86,25 @@ export class UserWrintingComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.form.value);
+  }
+
+  pegarCep(): void {
+    console.log(this.form.value.cep.length);
+    if (this.form.value.cep.length === 8) {
+      this.cepService.pegarCep(this.form.value.cep).subscribe((response) => {
+        if (response.erro) {
+          ToastUtils.error('Cep não encontrado!');
+          return;
+        }
+        this.form.patchValue({
+          rua: response.logradouro || '',
+          complemento: response.complemento || '',
+          bairro: response.bairro || '',
+          cidade: response.localidade || '',
+          estado: response.estado || '',
+        });
+      });
+    }
   }
 
   saveButton(): void {

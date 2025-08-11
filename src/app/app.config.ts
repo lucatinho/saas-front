@@ -14,6 +14,8 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 import localePt from '@angular/common/locales/pt';
+import { provideHttpClient } from '@angular/common/http';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -26,7 +28,9 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    provideHttpClient(),
     provideHotToastConfig(),
     { provide: LOCALE_ID, useValue: 'pt-BR' },
+    provideEnvironmentNgxMask(),
   ],
 };
