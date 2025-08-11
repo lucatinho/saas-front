@@ -23,6 +23,7 @@ import { cpfCnpjValidator } from '../../../shared/validators/cpf-cnpj.validator'
 import { ToastUtils } from '../../../shared/utils/toast.utils';
 import { CepService } from '../../../core/services/cep.service';
 import { NgxMaskDirective } from 'ngx-mask';
+import {Estado, Municipio} from '../../../shared/models/Endereco.model';
 
 @Component({
   selector: 'app-user-wrinting',
@@ -44,6 +45,8 @@ import { NgxMaskDirective } from 'ngx-mask';
 export class UserWrintingComponent implements OnInit {
   cod: number;
   viewType: ViewFormType;
+  estados = new Array<Estado>();
+  municipio = new Array<Municipio>();
   private route = inject(ActivatedRoute);
   private cepService = inject(CepService);
   private fb = inject(NonNullableFormBuilder);
@@ -86,6 +89,21 @@ export class UserWrintingComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.form.value);
+    this.listarEstados();
+  }
+
+  listarEstados(): void {
+    this.cepService.listarEstados().subscribe((response) => {
+      this.estados = response;
+      console.log(response);
+    });
+  }
+
+  onEstadoChange(sigla: string): void {
+    this.cepService.listarMunicipios(sigla).subscribe((response) => {
+      this.municipio = response;
+      console.log(response);
+    });
   }
 
   pegarCep(): void {
@@ -101,7 +119,7 @@ export class UserWrintingComponent implements OnInit {
           complemento: response.complemento || '',
           bairro: response.bairro || '',
           cidade: response.localidade || '',
-          estado: response.estado || '',
+          estado: response.uf || '',
         });
       });
     }
@@ -113,5 +131,6 @@ export class UserWrintingComponent implements OnInit {
       ToastUtils.error('Alguns dados estão inválidos!');
       return;
     }
+    console.log(this.form.value);
   }
 }

@@ -52,10 +52,18 @@
         <input formControlName="cep" mask="00000-000" matInput maxlength="9" placeholder="00000-000" type="text"
                (blur)="pegarCep()">
       </mat-form-field>
+
       <mat-form-field appearance="outline" class="col-md-3">
         <mat-label>Estado</mat-label>
-        <input formControlName="estado" matInput placeholder="Estado" type="text">
+        <mat-select formControlName="estado" (selectionChange)="onEstadoChange($event.value)">
+          @for (estado of estados; track estado.id) {
+            <mat-option [value]="estado.sigla">
+              {{ estado.nome }}
+            </mat-option>
+          }
+        </mat-select>
       </mat-form-field>
+
       <mat-form-field appearance="outline" class="col-md-3">
         <mat-label>Cidade</mat-label>
         <input formControlName="cidade" matInput placeholder="Cidade" type="text">
