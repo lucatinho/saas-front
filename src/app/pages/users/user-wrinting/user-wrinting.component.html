@@ -53,16 +53,14 @@
                (blur)="pegarCep()">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="col-md-3">
-        <mat-label>Estado</mat-label>
-        <mat-select formControlName="estado" (selectionChange)="onEstadoChange($event.value)">
-          @for (estado of estados; track estado.id) {
-            <mat-option [value]="estado.sigla">
-              {{ estado.nome }}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <app-search-select
+        class="col-md-3"
+        [control]="form.get('estado')"
+        [label]="'Estado'"
+        [labelKey]="'nome'"
+        [options]="estados"
+        [valueKey]="'sigla'"
+      />
 
       <mat-form-field appearance="outline" class="col-md-3">
         <mat-label>Cidade</mat-label>

@@ -1,0 +1,25 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>{{ label() }}</mat-label>
+  <mat-select [formControl]="control()" (openedChange)="onOpen($event)">
+    <mat-option class="search-option">
+      <input
+        autocomplete="off"
+        class="search-input"
+        matInput
+        placeholder="Filtrar..."
+        type="text"
+        [value]="searchTerm()"
+        (click)="$event.stopPropagation()"
+        (keyup)="updateSearch($event.target!.value)"
+      />
+    </mat-option>
+    @for (opt of filteredOptions(); track opt[valueKey()]) {
+      <mat-option [value]="opt[valueKey()]">
+        {{ opt[labelKey()] }}
+      </mat-option>
+    }
+    @if (!filteredOptions().length) {
+      <mat-option>Item não encontrado</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

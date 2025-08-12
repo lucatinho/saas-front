@@ -23,7 +23,8 @@ import { cpfCnpjValidator } from '../../../shared/validators/cpf-cnpj.validator'
 import { ToastUtils } from '../../../shared/utils/toast.utils';
 import { CepService } from '../../../core/services/cep.service';
 import { NgxMaskDirective } from 'ngx-mask';
-import {Estado, Municipio} from '../../../shared/models/Endereco.model';
+import { Estado, Municipio } from '../../../shared/models/Endereco.model';
+import { SearchSelectComponent } from '../../../shared/components/search-select/search-select.component';
 
 @Component({
   selector: 'app-user-wrinting',
@@ -37,6 +38,7 @@ import {Estado, Municipio} from '../../../shared/models/Endereco.model';
     PhoneMaskDirective,
     CpfCnpjMaskDirective,
     NgxMaskDirective,
+    SearchSelectComponent,
   ],
   templateUrl: './user-wrinting.component.html',
   styleUrl: './user-wrinting.component.scss',
@@ -88,7 +90,7 @@ export class UserWrintingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.form.value);
+    console.log(this.form);
     this.listarEstados();
   }
 
