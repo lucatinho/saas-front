@@ -19,7 +19,7 @@
       </mat-option>
     }
     @if (!filteredOptions().length) {
-      <mat-option>Item não encontrado</mat-option>
+      <mat-option [disabled]="true">Não a itens...</mat-option>
     }
   </mat-select>
 </mat-form-field>

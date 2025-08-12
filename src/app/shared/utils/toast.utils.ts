@@ -26,4 +26,8 @@ export class ToastUtils {
   static error(message: string): void {
     ToastUtils.toast.error(message);
   }
+
+  static loading(message: string): void {
+    ToastUtils.toast.loading(message);
+  }
 }
